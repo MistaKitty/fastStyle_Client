@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -26,7 +27,7 @@ export default function Header() {
   const [activeIndex, setActiveIndex] = useState(null);
   const { t, i18n } = useTranslation();
   const [languages, setLanguages] = useState([]);
-  const [language, setLanguage] = useState(i18n.language || "pt");
+  const [language, setLanguage] = useState("");
 
   const items = [
     { key: "menu.inicio", path: "/" },
@@ -43,10 +44,12 @@ export default function Header() {
       try {
         const response = await import("../assets/languages.json");
         setLanguages(response.languages);
+
+        const availableLanguages = response.languages.map((lang) => lang.code);
         setLanguage(
-          response.languages.some((lang) => lang.code === i18n.language)
+          availableLanguages.includes(i18n.language)
             ? i18n.language
-            : "pt"
+            : availableLanguages[0] || "pt"
         );
       } catch (error) {
         console.error("Erro ao carregar as línguas:", error);
