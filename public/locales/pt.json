@@ -7,7 +7,11 @@
     "contato": "Entre em contato",
     "galeria": "Galeria",
     "blog": "Blog & dicas",
-    "recrutamento": "Recrutamento",
-    "lingua": "Língua"
+    "recrutamento": "Recrutamento"
+  },
+  "botao": {
+    "lingua": "Língua",
+    "registar": "Registar",
+    "logar": "Entrar"
   }
 }

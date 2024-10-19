@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LoadingButton from "@mui/lab/LoadingButton";
+import favicon from "../assets/favicon.svg";
 
 export default function Header() {
   const theme = createTheme();
@@ -46,7 +47,7 @@ export default function Header() {
     };
 
     loadLanguages();
-  }, []);
+  }, [i18n.language]);
 
   const handleLanguageChange = (event) => {
     const selectedLanguage = event.target.value;
@@ -70,9 +71,14 @@ export default function Header() {
               alignItems: "center",
             }}
           >
-            <img src="" alt="Logo" style={{ width: "100px", height: "auto" }} />
+            <img
+              src={favicon}
+              alt="Logo"
+              style={{ width: "50px", height: "auto" }}
+            />
+
             <Typography variant="h6" sx={{ marginTop: "8px" }}>
-              Logo
+              Hair Radiant
             </Typography>
           </Box>
           {/*Button box*/}
@@ -87,40 +93,73 @@ export default function Header() {
           </Box>
 
           {/*Language Dropdown*/}
-          <FormControl
-            variant="filled"
-            sx={{
-              m: 1,
-              minWidth: 120,
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <InputLabel id="LangSelectorLabel">{t("menu.lingua")}</InputLabel>
-            <Select
-              labelId="LangSelectorLabel"
-              id="LangSelector"
-              onChange={handleLanguageChange}
-              value={language}
-            >
-              {languages.map((language) => (
-                <MenuItem key={language.code} value={language.code}>
-                  {language.name}
-                </MenuItem>
-              ))}
-            </Select>
-            <LoadingButton
+          <Box>
+            <FormControl
+              variant="filled"
               size="small"
-              // onClick={handleClick}
-              // loading={loading}
-              loadingPosition="start"
-              loadingIndicator="A registar..."
-              startIcon={<PersonAddIcon />}
-              variant="contained"
+              sx={{
+                m: 1,
+                minWidth: 120,
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
             >
-              Register
-            </LoadingButton>
-          </FormControl>
+              <Box>
+                <InputLabel
+                  id="LangSelectorLabel"
+                  sx={{ textAlign: "center", width: "100%" }}
+                >
+                  {t("botao.lingua")}
+                </InputLabel>
+
+                <Select
+                  labelId="LangSelectorLabel"
+                  id="LangSelector"
+                  onChange={handleLanguageChange}
+                  value={language}
+                >
+                  {languages.map((language) => (
+                    <MenuItem key={language.code} value={language.code}>
+                      {language.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Box>
+              <Box
+                sx={{
+                  m: 1,
+                  display: "flex",
+                  gap: 1,
+                }}
+              >
+                <LoadingButton
+                  size="small"
+                  sx={{ flex: 1 }}
+                  // onClick={handleClick}
+                  // loading={loading}
+                  loadingPosition="start"
+                  loadingIndicator="A registar..."
+                  startIcon={<PersonAddIcon />}
+                  variant="contained"
+                >
+                  {t("botao.registar")}
+                </LoadingButton>
+
+                <LoadingButton
+                  size="small"
+                  sx={{ flex: 1 }}
+                  // onClick={handleLoginClick}
+                  // loading={loadingLogin}
+                  loadingPosition="start"
+                  loadingIndicator="A iniciar sessão..."
+                  startIcon={<PersonAddIcon />}
+                  variant="contained"
+                >
+                  {t("botao.logar")}
+                </LoadingButton>
+              </Box>
+            </FormControl>
+          </Box>
         </Toolbar>
       )}
     </AppBar>

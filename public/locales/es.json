@@ -2,12 +2,16 @@
   "underdev": "En desarrollo🚧🚧🚧🚧",
   "menu": {
     "inicio": "Inicio",
-    "servicos": "Servicios y Precios",
+    "servicos": "Servicios & Precios",
     "sobre": "Sobre nosotros",
-    "contato": "Contáctenos",
+    "contato": "Contacto",
     "galeria": "Galería",
-    "blog": "Blog y consejos",
-    "recrutamento": "Reclutamiento",
-    "lingua": "Idioma"
+    "blog": "Blog & consejos",
+    "recrutamento": "Reclutamiento"
+  },
+  "botao": {
+    "lingua": "Idioma",
+    "registar": "Registrar",
+    "logar": "Entrar"
   }
 }

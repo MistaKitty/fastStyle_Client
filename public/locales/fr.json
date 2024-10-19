@@ -1,0 +1,17 @@
+{
+  "underdev": "En développement🚧🚧🚧🚧",
+  "menu": {
+    "inicio": "Accueil",
+    "servicos": "Services & Tarifs",
+    "sobre": "À propos de nous",
+    "contato": "Contact",
+    "galeria": "Galerie",
+    "blog": "Blog & conseils",
+    "recrutamento": "Recrutement"
+  },
+  "botao": {
+    "lingua": "Langue",
+    "registar": "S'inscrire",
+    "logar": "Entrer"
+  }
+}

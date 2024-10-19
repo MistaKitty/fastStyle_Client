@@ -3,11 +3,15 @@
   "menu": {
     "inicio": "Home",
     "servicos": "Services & Prices",
-    "sobre": "About Us",
-    "contato": "Contact Us",
+    "sobre": "About us",
+    "contato": "Contact",
     "galeria": "Gallery",
-    "blog": "Blog & Tips",
-    "recrutamento": "Recruitment",
-    "lingua": "Language"
+    "blog": "Blog & tips",
+    "recrutamento": "Recruitment"
+  },
+  "botao": {
+    "lingua": "Language",
+    "registar": "Register",
+    "logar": "Login"
   }
 }
