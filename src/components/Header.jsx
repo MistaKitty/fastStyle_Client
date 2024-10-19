@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   AppBar,
@@ -71,15 +71,15 @@ export default function Header() {
               alignItems: "center",
             }}
           >
-            <img
-              src={favicon}
-              alt="Logo"
-              style={{ width: "50px", height: "auto" }}
-            />
+            <Box>
+              <Link to="/" className="text-reset">
+                <img src={favicon} alt="Logo" className="img-fluid w-25" />
 
-            <Typography variant="h6" sx={{ marginTop: "8px" }}>
-              Hair Radiant
-            </Typography>
+                <Typography variant="h6" sx={{ marginTop: "8px" }}>
+                  Hair Radiant
+                </Typography>
+              </Link>
+            </Box>
           </Box>
           {/*Button box*/}
           <Box>
