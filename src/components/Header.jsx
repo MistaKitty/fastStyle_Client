@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   AppBar,
@@ -21,15 +21,24 @@ import favicon from "../assets/favicon.svg";
 export default function Header() {
   const theme = createTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const buttonRefs = useRef([]);
+  const location = useLocation();
+  const [activeIndex, setActiveIndex] = useState(null);
   const { t, i18n } = useTranslation();
   const [languages, setLanguages] = useState([]);
   const [language, setLanguage] = React.useState(
     languages.find((lang) => lang.code === i18n.language)?.code || ""
   );
 
-  console.log("Línguas disponíveis:", languages);
-  console.log("Língua atual do i18n:", i18n.language);
+  const items = [
+    { key: "menu.inicio", path: "/" },
+    { key: "menu.servicos", path: "/servicos" },
+    { key: "menu.sobre", path: "/sobre" },
+    { key: "menu.contato", path: "/contato" },
+    { key: "menu.galeria", path: "/galeria" },
+    { key: "menu.blog", path: "/blog" },
+    { key: "menu.recrutamento", path: "/recrutamento" },
+  ].map((item) => ({ ...item, t: t(item.key) }));
 
   useEffect(() => {
     const loadLanguages = async () => {
@@ -49,11 +58,47 @@ export default function Header() {
     loadLanguages();
   }, [i18n.language]);
 
+  // Efeitos click, hover e active
+
   const handleLanguageChange = (event) => {
     const selectedLanguage = event.target.value;
     i18n.changeLanguage(selectedLanguage);
     setLanguage(selectedLanguage);
   };
+
+  const handleMouseEnter = (index) => {
+    if (location.pathname !== items[index].path && activeIndex !== index) {
+      buttonRefs.current[index].style.backgroundColor = "rgba(0, 0, 0, 0.1)";
+    }
+  };
+
+  const handleMouseLeave = (index) => {
+    if (location.pathname !== items[index].path) {
+      buttonRefs.current[index].style.backgroundColor = "";
+    }
+  };
+
+  const handleClick = (index) => {
+    setActiveIndex(index);
+
+    buttonRefs.current[index].style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+  };
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const index = items.findIndex((item) => item.path === currentPath);
+    setActiveIndex(index);
+
+    if (index !== -1) {
+      buttonRefs.current[index].style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+    }
+
+    buttonRefs.current.forEach((ref, idx) => {
+      if (idx !== index) {
+        ref.style.backgroundColor = "";
+      }
+    });
+  }, [items, location.pathname]);
 
   return (
     <AppBar position="fixed">
@@ -82,16 +127,46 @@ export default function Header() {
             </Box>
           </Box>
           {/*Button box*/}
-          <Box>
-            <Button color="inherit">{t("menu.inicio")}</Button>
-            <Button color="inherit">{t("menu.servicos")}</Button>
-            <Button color="inherit">{t("menu.sobre")}</Button>
-            <Button color="inherit">{t("menu.contato")}</Button>
-            <Button color="inherit">{t("menu.galeria")}</Button>
-            <Button color="inherit">{t("menu.blog")}</Button>
-            <Button color="inherit">{t("menu.recrutamento")}</Button>
-          </Box>
 
+          <Box>
+            {[
+              { key: "menu.inicio", path: "/" },
+              { key: "menu.servicos", path: "/servicos" },
+              { key: "menu.sobre", path: "/sobre" },
+              { key: "menu.contato", path: "/contato" },
+              { key: "menu.galeria", path: "/galeria" },
+              { key: "menu.blog", path: "/blog" },
+              { key: "menu.recrutamento", path: "/recrutamento" },
+            ].map((item, index) => {
+              const isActive = location.pathname === item.path; // Verifica se a rota atual é a do botão
+
+              return (
+                <Link
+                  to={item.path}
+                  key={index}
+                  style={{ textDecoration: "none" }}
+                  className="text-reset"
+                >
+                  <Button
+                    ref={(el) => (buttonRefs.current[index] = el)}
+                    color="inherit"
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onMouseLeave={() => handleMouseLeave(index)}
+                    onClick={() => handleClick(index)}
+                    style={{
+                      backgroundColor:
+                        isActive || index === activeIndex
+                          ? "rgba(0, 0, 0, 0.2)"
+                          : "",
+                      transition: "background-color 0.2s",
+                    }}
+                  >
+                    {t(item.key)} {/* Tradução para o texto do botão */}
+                  </Button>
+                </Link>
+              );
+            })}
+          </Box>
           {/*Language Dropdown*/}
           <Box>
             <FormControl
@@ -132,31 +207,40 @@ export default function Header() {
                   gap: 1,
                 }}
               >
-                <LoadingButton
-                  size="small"
-                  sx={{ flex: 1 }}
-                  // onClick={handleClick}
-                  // loading={loading}
-                  loadingPosition="start"
-                  loadingIndicator="A registar..."
-                  startIcon={<PersonAddIcon />}
-                  variant="contained"
+                {/* Botão de Registar */}
+                <Link
+                  to="/registar"
+                  style={{ textDecoration: "none", flex: 1 }}
                 >
-                  {t("botao.registar")}
-                </LoadingButton>
+                  <LoadingButton
+                    size="small"
+                    sx={{ flex: 1 }}
+                    // onClick={handleRegisterClick}
+                    // loading={loadingRegister}
+                    loadingPosition="start"
+                    loadingIndicator="A registar..."
+                    startIcon={<PersonAddIcon />}
+                    variant="contained"
+                  >
+                    {t("botao.registar")}
+                  </LoadingButton>
+                </Link>
 
-                <LoadingButton
-                  size="small"
-                  sx={{ flex: 1 }}
-                  // onClick={handleLoginClick}
-                  // loading={loadingLogin}
-                  loadingPosition="start"
-                  loadingIndicator="A iniciar sessão..."
-                  startIcon={<PersonAddIcon />}
-                  variant="contained"
-                >
-                  {t("botao.logar")}
-                </LoadingButton>
+                {/* Botão de Iniciar Sessão */}
+                <Link to="/login" style={{ textDecoration: "none", flex: 1 }}>
+                  <LoadingButton
+                    size="small"
+                    sx={{ flex: 1 }}
+                    // onClick={handleLoginClick}
+                    // loading={loadingLogin}
+                    loadingPosition="start"
+                    loadingIndicator="A iniciar sessão..."
+                    startIcon={<PersonAddIcon />}
+                    variant="contained"
+                  >
+                    {t("botao.logar")}
+                  </LoadingButton>
+                </Link>
               </Box>
             </FormControl>
           </Box>
