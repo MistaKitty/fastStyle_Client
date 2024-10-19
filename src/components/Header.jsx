@@ -26,9 +26,7 @@ export default function Header() {
   const [activeIndex, setActiveIndex] = useState(null);
   const { t, i18n } = useTranslation();
   const [languages, setLanguages] = useState([]);
-  const [language, setLanguage] = React.useState(
-    languages.find((lang) => lang.code === i18n.language)?.code || ""
-  );
+  const [language, setLanguage] = useState(i18n.language || "pt");
 
   const items = [
     { key: "menu.inicio", path: "/" },
@@ -45,11 +43,11 @@ export default function Header() {
       try {
         const response = await import("../assets/languages.json");
         setLanguages(response.languages);
-        if (response.languages.some((lang) => lang.code === i18n.language)) {
-          setLanguage(i18n.language);
-        } else {
-          setLanguage("pt");
-        }
+        setLanguage(
+          response.languages.some((lang) => lang.code === i18n.language)
+            ? i18n.language
+            : "pt"
+        );
       } catch (error) {
         console.error("Erro ao carregar as línguas:", error);
       }
@@ -58,8 +56,6 @@ export default function Header() {
     loadLanguages();
   }, [i18n.language]);
 
-  // Efeitos click, hover e active
-
   const handleLanguageChange = (event) => {
     const selectedLanguage = event.target.value;
     i18n.changeLanguage(selectedLanguage);
@@ -67,7 +63,7 @@ export default function Header() {
   };
 
   const handleMouseEnter = (index) => {
-    if (location.pathname !== items[index].path && activeIndex !== index) {
+    if (location.pathname !== items[index].path) {
       buttonRefs.current[index].style.backgroundColor = "rgba(0, 0, 0, 0.1)";
     }
   };
@@ -80,7 +76,6 @@ export default function Header() {
 
   const handleClick = (index) => {
     setActiveIndex(index);
-
     buttonRefs.current[index].style.backgroundColor = "rgba(0, 0, 0, 0.2)";
   };
 
@@ -89,13 +84,9 @@ export default function Header() {
     const index = items.findIndex((item) => item.path === currentPath);
     setActiveIndex(index);
 
-    if (index !== -1) {
-      buttonRefs.current[index].style.backgroundColor = "rgba(0, 0, 0, 0.2)";
-    }
-
     buttonRefs.current.forEach((ref, idx) => {
-      if (idx !== index) {
-        ref.style.backgroundColor = "";
+      if (ref) {
+        ref.style.backgroundColor = idx === index ? "rgba(0, 0, 0, 0.2)" : "";
       }
     });
   }, [items, location.pathname]);
@@ -103,12 +94,9 @@ export default function Header() {
   return (
     <AppBar position="fixed">
       {isMobile ? (
-        // Menu mobile
         <Button variant="contained">Menu Mobile 🚧</Button>
       ) : (
-        // Menu desktop
         <Toolbar className="d-flex justify-content-between">
-          {/*Logo box*/}
           <Box
             sx={{
               display: "flex",
@@ -116,133 +104,89 @@ export default function Header() {
               alignItems: "center",
             }}
           >
-            <Box>
-              <Link to="/" className="text-reset">
-                <img src={favicon} alt="Logo" className="img-fluid w-25" />
-
-                <Typography variant="h6" sx={{ marginTop: "8px" }}>
-                  Hair Radiant
-                </Typography>
-              </Link>
-            </Box>
+            <Link to="/" className="text-reset">
+              <img src={favicon} alt="Logo" className="img-fluid w-25" />
+              <Typography variant="h6" sx={{ marginTop: "8px" }}>
+                Hair Radiant
+              </Typography>
+            </Link>
           </Box>
-          {/*Button box*/}
-
           <Box>
-            {[
-              { key: "menu.inicio", path: "/" },
-              { key: "menu.servicos", path: "/servicos" },
-              { key: "menu.sobre", path: "/sobre" },
-              { key: "menu.contato", path: "/contato" },
-              { key: "menu.galeria", path: "/galeria" },
-              { key: "menu.blog", path: "/blog" },
-              { key: "menu.recrutamento", path: "/recrutamento" },
-            ].map((item, index) => {
-              const isActive = location.pathname === item.path; // Verifica se a rota atual é a do botão
-
-              return (
-                <Link
-                  to={item.path}
-                  key={index}
-                  style={{ textDecoration: "none" }}
-                  className="text-reset"
+            {items.map((item, index) => (
+              <Link
+                to={item.path}
+                key={index}
+                style={{ textDecoration: "none" }}
+                className="text-reset"
+              >
+                <Button
+                  ref={(el) => (buttonRefs.current[index] = el)}
+                  color="inherit"
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={() => handleMouseLeave(index)}
+                  onClick={() => handleClick(index)}
+                  style={{
+                    backgroundColor:
+                      location.pathname === item.path || index === activeIndex
+                        ? "rgba(0, 0, 0, 0.2)"
+                        : "",
+                    transition: "background-color 0.2s",
+                  }}
                 >
-                  <Button
-                    ref={(el) => (buttonRefs.current[index] = el)}
-                    color="inherit"
-                    onMouseEnter={() => handleMouseEnter(index)}
-                    onMouseLeave={() => handleMouseLeave(index)}
-                    onClick={() => handleClick(index)}
-                    style={{
-                      backgroundColor:
-                        isActive || index === activeIndex
-                          ? "rgba(0, 0, 0, 0.2)"
-                          : "",
-                      transition: "background-color 0.2s",
-                    }}
-                  >
-                    {t(item.key)} {/* Tradução para o texto do botão */}
-                  </Button>
-                </Link>
-              );
-            })}
+                  {item.t}
+                </Button>
+              </Link>
+            ))}
           </Box>
-          {/*Language Dropdown*/}
           <Box>
             <FormControl
               variant="filled"
               size="small"
-              sx={{
-                m: 1,
-                minWidth: 120,
-                display: "flex",
-                justifyContent: "flex-end",
-              }}
+              sx={{ m: 1, minWidth: 120 }}
             >
-              <Box>
-                <InputLabel
-                  id="LangSelectorLabel"
-                  sx={{ textAlign: "center", width: "100%" }}
-                >
-                  {t("botao.lingua")}
-                </InputLabel>
-
-                <Select
-                  labelId="LangSelectorLabel"
-                  id="LangSelector"
-                  onChange={handleLanguageChange}
-                  value={language}
-                >
-                  {languages.map((language) => (
-                    <MenuItem key={language.code} value={language.code}>
-                      {language.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </Box>
-              <Box
-                sx={{
-                  m: 1,
-                  display: "flex",
-                  gap: 1,
-                }}
+              <InputLabel
+                id="LangSelectorLabel"
+                sx={{ textAlign: "center", width: "100%" }}
               >
-                {/* Botão de Registar */}
-                <Link
-                  to="/registar"
-                  style={{ textDecoration: "none", flex: 1 }}
-                >
-                  <LoadingButton
-                    size="small"
-                    sx={{ flex: 1 }}
-                    // onClick={handleRegisterClick}
-                    // loading={loadingRegister}
-                    loadingPosition="start"
-                    loadingIndicator="A registar..."
-                    startIcon={<PersonAddIcon />}
-                    variant="contained"
-                  >
-                    {t("botao.registar")}
-                  </LoadingButton>
-                </Link>
-
-                {/* Botão de Iniciar Sessão */}
-                <Link to="/login" style={{ textDecoration: "none", flex: 1 }}>
-                  <LoadingButton
-                    size="small"
-                    sx={{ flex: 1 }}
-                    // onClick={handleLoginClick}
-                    // loading={loadingLogin}
-                    loadingPosition="start"
-                    loadingIndicator="A iniciar sessão..."
-                    startIcon={<PersonAddIcon />}
-                    variant="contained"
-                  >
-                    {t("botao.logar")}
-                  </LoadingButton>
-                </Link>
-              </Box>
+                {t("botao.lingua")}
+              </InputLabel>
+              <Select
+                labelId="LangSelectorLabel"
+                id="LangSelector"
+                onChange={handleLanguageChange}
+                value={language}
+              >
+                {languages.map((lang) => (
+                  <MenuItem key={lang.code} value={lang.code}>
+                    {lang.name}
+                  </MenuItem>
+                ))}
+              </Select>
             </FormControl>
+            <Box sx={{ m: 1, display: "flex", gap: 1 }}>
+              <Link to="/registar" style={{ textDecoration: "none", flex: 1 }}>
+                <LoadingButton
+                  size="small"
+                  loadingPosition="start"
+                  loadingIndicator="A registar..."
+                  startIcon={<PersonAddIcon />}
+                  variant="contained"
+                >
+                  {t("botao.registar")}
+                </LoadingButton>
+              </Link>
+              <Link to="/login" style={{ textDecoration: "none", flex: 1 }}>
+                <LoadingButton
+                  size="small"
+                  loadingPosition="start"
+                  loadingIndicator="A iniciar sessão..."
+                  startIcon={<PersonAddIcon />}
+                  variant="contained"
+                >
+                  {t("botao.login")}
+                </LoadingButton>
+              </Link>
+            </Box>
           </Box>
         </Toolbar>
       )}
