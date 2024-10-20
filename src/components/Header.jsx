@@ -14,8 +14,10 @@ import {
   useMediaQuery,
   createTheme,
   Typography,
+  IconButton,
 } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import MenuIcon from "@mui/icons-material/Menu";
 import LoadingButton from "@mui/lab/LoadingButton";
 import favicon from "../assets/favicon.svg";
 
@@ -97,7 +99,26 @@ export default function Header() {
   return (
     <AppBar position="fixed">
       {isMobile ? (
-        <Button variant="contained">Menu Mobile 🚧</Button>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-around",
+          }}
+        >
+          <Box sx={{ ml: -15 }}>
+            <Link to="/" className="text-reset">
+              <img src={favicon} alt="Logo" className="img-fluid w-25" />
+              <Typography variant="h6" sx={{ marginTop: "8px" }}>
+                Hair Radiant
+              </Typography>
+            </Link>
+          </Box>
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+        </Box>
       ) : (
         <Toolbar className="d-flex justify-content-between">
           <Box
@@ -171,7 +192,7 @@ export default function Header() {
                 <LoadingButton
                   size="small"
                   loadingPosition="start"
-                  loadingIndicator="A registar..."
+                  loadingIndicator="botao.registando"
                   startIcon={<PersonAddIcon />}
                   variant="contained"
                 >
@@ -182,11 +203,11 @@ export default function Header() {
                 <LoadingButton
                   size="small"
                   loadingPosition="start"
-                  loadingIndicator="A iniciar sessão..."
+                  loadingIndicator="botao.logando"
                   startIcon={<PersonAddIcon />}
                   variant="contained"
                 >
-                  {t("botao.login")}
+                  {t("botao.logar")}
                 </LoadingButton>
               </Link>
             </Box>

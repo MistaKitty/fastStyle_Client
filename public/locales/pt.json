@@ -12,6 +12,8 @@
   "botao": {
     "lingua": "Língua",
     "registar": "Registar",
-    "logar": "Entrar"
+    "logar": "Entrar",
+    "logando": "A entrar...",
+    "registando": "A registar..."
   }
 }
