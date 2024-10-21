@@ -20,7 +20,13 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import MenuIcon from "@mui/icons-material/Menu";
 import LoadingButton from "@mui/lab/LoadingButton";
 import favicon from "../assets/favicon.svg";
-
+import {
+  handleLanguageChange,
+  handleMouseEnter,
+  handleMouseLeave,
+  handleClick,
+  updateActiveButtonStyles,
+} from "../utils/Handlers";
 export default function Header() {
   const theme = createTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -48,11 +54,20 @@ export default function Header() {
         setLanguages(response.languages);
 
         const availableLanguages = response.languages.map((lang) => lang.code);
-        setLanguage(
-          availableLanguages.includes(i18n.language)
-            ? i18n.language
-            : availableLanguages[0] || "pt"
-        );
+        const browserLanguage = navigator.language.split("-")[0];
+
+        const cookieLanguage = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("i18next="))
+          ?.split("=")[1];
+
+        const languageToSet =
+          cookieLanguage ||
+          (availableLanguages.includes(browserLanguage)
+            ? browserLanguage
+            : availableLanguages[0] || "pt");
+
+        setLanguage(languageToSet);
       } catch (error) {
         console.error("Erro ao carregar as línguas:", error);
       }
@@ -61,40 +76,9 @@ export default function Header() {
     loadLanguages();
   }, [i18n.language]);
 
-  const handleLanguageChange = (event) => {
-    const selectedLanguage = event.target.value;
-    i18n.changeLanguage(selectedLanguage);
-    setLanguage(selectedLanguage);
-  };
-
-  const handleMouseEnter = (index) => {
-    if (location.pathname !== items[index].path) {
-      buttonRefs.current[index].style.backgroundColor = "rgba(0, 0, 0, 0.1)";
-    }
-  };
-
-  const handleMouseLeave = (index) => {
-    if (location.pathname !== items[index].path) {
-      buttonRefs.current[index].style.backgroundColor = "";
-    }
-  };
-
-  const handleClick = (index) => {
-    setActiveIndex(index);
-    buttonRefs.current[index].style.backgroundColor = "rgba(0, 0, 0, 0.2)";
-  };
-
   useEffect(() => {
-    const currentPath = location.pathname;
-    const index = items.findIndex((item) => item.path === currentPath);
-    setActiveIndex(index);
-
-    buttonRefs.current.forEach((ref, idx) => {
-      if (ref) {
-        ref.style.backgroundColor = idx === index ? "rgba(0, 0, 0, 0.2)" : "";
-      }
-    });
-  }, [items, location.pathname]);
+    updateActiveButtonStyles(location, items, buttonRefs, setActiveIndex);
+  }, [items, location, location.pathname]);
 
   return (
     <AppBar position="fixed">
@@ -177,7 +161,9 @@ export default function Header() {
               <Select
                 labelId="LangSelectorLabel"
                 id="LangSelector"
-                onChange={handleLanguageChange}
+                onChange={(event) =>
+                  handleLanguageChange(event, i18n, setLanguage)
+                }
                 value={language}
               >
                 {languages.map((lang) => (
