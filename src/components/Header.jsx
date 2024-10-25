@@ -1,4 +1,4 @@
-// Header.jsx
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -23,9 +23,6 @@ import {
   loadLanguages,
   handleMouseEnter,
   handleMouseLeave,
-  handleButtonClick,
-  updateActiveButtonStyles,
-  setButtonStyles,
   useMenuItems,
 } from "../utils/Handlers";
 import MobileHeader from "./MobileHeader";
@@ -35,7 +32,6 @@ export default function Header() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const buttonRefs = useRef([]);
   const location = useLocation();
-  const [activeIndex, setActiveIndex] = useState(null);
   const { t, i18n } = useTranslation();
   const [languages, setLanguages] = useState([]);
   const [language, setLanguage] = useState("");
@@ -45,9 +41,33 @@ export default function Header() {
     loadLanguages(setLanguages, setLanguage);
   }, [i18n.language]);
 
-  useEffect(() => {
-    updateActiveButtonStyles(location, menuItems, buttonRefs, setActiveIndex);
-  }, [location, location.pathname, menuItems]);
+  const renderButtons = () =>
+    menuItems.map((item, index) => (
+      <Link
+        to={item.path}
+        key={index}
+        style={{ textDecoration: "none" }}
+        className="text-reset"
+      >
+        <Button
+          ref={(el) => (buttonRefs.current[index] = el)}
+          color="inherit"
+          onMouseEnter={() =>
+            handleMouseEnter(index, location, menuItems, buttonRefs)
+          }
+          onMouseLeave={() =>
+            handleMouseLeave(index, location, menuItems, buttonRefs)
+          }
+          style={{
+            backgroundColor:
+              location.pathname === item.path ? "rgba(0, 0, 0, 0.2)" : "",
+            transition: "background-color 0.2s",
+          }}
+        >
+          {item.t}
+        </Button>
+      </Link>
+    ));
 
   return (
     <AppBar position="fixed">
@@ -70,38 +90,7 @@ export default function Header() {
               </Typography>
             </Link>
           </Box>
-          <Box>
-            {menuItems.map((item, index) => (
-              <Link
-                to={item.path}
-                key={index}
-                style={{ textDecoration: "none" }}
-                className="text-reset"
-              >
-                <Button
-                  ref={(el) => (buttonRefs.current[index] = el)}
-                  color="inherit"
-                  onMouseEnter={() =>
-                    handleMouseEnter(index, location, menuItems, buttonRefs)
-                  }
-                  onMouseLeave={() =>
-                    handleMouseLeave(index, location, menuItems, buttonRefs)
-                  }
-                  onClick={() =>
-                    handleButtonClick(index, setActiveIndex, buttonRefs)
-                  }
-                  style={setButtonStyles(
-                    location,
-                    item.path,
-                    activeIndex,
-                    index
-                  )}
-                >
-                  {item.t}
-                </Button>
-              </Link>
-            ))}
-          </Box>
+          <Box>{renderButtons()}</Box>
           <Box>
             <FormControl
               variant="filled"
