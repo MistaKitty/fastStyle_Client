@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -54,7 +55,7 @@ export default function HeaderMobile() {
           maxWidth: "400px",
         }}
       >
-        <Box>
+        <Box sx={{ m: "15px" }}>
           <Link to="/" className="text-reset">
             <img
               src={favicon}
@@ -69,7 +70,12 @@ export default function HeaderMobile() {
             </Typography>
           </Link>
         </Box>
-        <IconButton edge="start" color="inherit" aria-label="menu">
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ m: "15px" }}
+        >
           <MenuIcon />
         </IconButton>
       </Box>
