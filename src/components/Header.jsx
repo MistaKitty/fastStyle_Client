@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-unused-vars
+// Header.jsx
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -20,10 +20,13 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import favicon from "../assets/favicon.svg";
 import {
   handleLanguageChange,
+  loadLanguages,
   handleMouseEnter,
   handleMouseLeave,
-  handleClick,
+  handleButtonClick,
   updateActiveButtonStyles,
+  setButtonStyles,
+  useMenuItems,
 } from "../utils/Handlers";
 import MobileHeader from "./MobileHeader";
 
@@ -36,49 +39,15 @@ export default function Header() {
   const { t, i18n } = useTranslation();
   const [languages, setLanguages] = useState([]);
   const [language, setLanguage] = useState("");
-
-  const items = [
-    { key: "menu.inicio", path: "/" },
-    { key: "menu.servicos", path: "/servicos" },
-    { key: "menu.sobre", path: "/sobre" },
-    { key: "menu.contato", path: "/contato" },
-    { key: "menu.galeria", path: "/galeria" },
-    { key: "menu.blog", path: "/blog" },
-    { key: "menu.recrutamento", path: "/recrutamento" },
-  ].map((item) => ({ ...item, t: t(item.key) }));
+  const menuItems = useMenuItems();
 
   useEffect(() => {
-    const loadLanguages = async () => {
-      try {
-        const response = await import("../assets/languages.json");
-        setLanguages(response.languages);
-
-        const availableLanguages = response.languages.map((lang) => lang.code);
-        const browserLanguage = navigator.language.split("-")[0];
-
-        const cookieLanguage = document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("i18next="))
-          ?.split("=")[1];
-
-        const languageToSet =
-          cookieLanguage ||
-          (availableLanguages.includes(browserLanguage)
-            ? browserLanguage
-            : availableLanguages[0] || "pt");
-
-        setLanguage(languageToSet);
-      } catch (error) {
-        console.error("Erro ao carregar as línguas:", error);
-      }
-    };
-
-    loadLanguages();
+    loadLanguages(setLanguages, setLanguage);
   }, [i18n.language]);
 
   useEffect(() => {
-    updateActiveButtonStyles(location, items, buttonRefs, setActiveIndex);
-  }, [items, location, location.pathname]);
+    updateActiveButtonStyles(location, menuItems, buttonRefs, setActiveIndex);
+  }, [location, location.pathname, menuItems]);
 
   return (
     <AppBar position="fixed">
@@ -102,7 +71,7 @@ export default function Header() {
             </Link>
           </Box>
           <Box>
-            {items.map((item, index) => (
+            {menuItems.map((item, index) => (
               <Link
                 to={item.path}
                 key={index}
@@ -112,16 +81,21 @@ export default function Header() {
                 <Button
                   ref={(el) => (buttonRefs.current[index] = el)}
                   color="inherit"
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={() => handleMouseLeave(index)}
-                  onClick={() => handleClick(index)}
-                  style={{
-                    backgroundColor:
-                      location.pathname === item.path || index === activeIndex
-                        ? "rgba(0, 0, 0, 0.2)"
-                        : "",
-                    transition: "background-color 0.2s",
-                  }}
+                  onMouseEnter={() =>
+                    handleMouseEnter(index, location, menuItems, buttonRefs)
+                  }
+                  onMouseLeave={() =>
+                    handleMouseLeave(index, location, menuItems, buttonRefs)
+                  }
+                  onClick={() =>
+                    handleButtonClick(index, setActiveIndex, buttonRefs)
+                  }
+                  style={setButtonStyles(
+                    location,
+                    item.path,
+                    activeIndex,
+                    index
+                  )}
                 >
                   {item.t}
                 </Button>
