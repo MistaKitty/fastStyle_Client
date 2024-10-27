@@ -2,19 +2,23 @@
   "languages": [
     {
       "code": "pt",
-      "name": "Português"
+      "name": "Português",
+      "flagCode": "PT"
     },
     {
       "code": "en",
-      "name": "English"
+      "name": "English",
+      "flagCode": "GB"
     },
     {
       "code": "es",
-      "name": "Español"
+      "name": "Español",
+      "flagCode": "ES"
     },
     {
       "code": "fr",
-      "name": "Français"
+      "name": "Français",
+      "flagCode": "FR"
     }
   ]
 }

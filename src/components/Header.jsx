@@ -29,7 +29,7 @@ import MobileHeader from "./MobileHeader";
 
 export default function Header() {
   const theme = createTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const buttonRefs = useRef([]);
   const location = useLocation();
   const { t, i18n } = useTranslation();

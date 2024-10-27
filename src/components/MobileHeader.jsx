@@ -1,45 +1,39 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { AppBar, Box, IconButton, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  IconButton,
+  Typography,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  FormControl,
+  Select,
+  MenuItem,
+  Avatar,
+} from "@mui/material";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import favicon from "../assets/favicon.svg";
-import { handleLanguageChange } from "../utils/Handlers";
+import { handleLanguageChange, loadLanguages } from "../utils/Handlers";
+import { useMenuItems } from "../utils/Handlers";
 
 export default function HeaderMobile() {
-  const location = useLocation();
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [languages, setLanguages] = useState([]);
   const [language, setLanguage] = useState("");
+  const menuItems = useMenuItems();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const toggleDrawer = (open) => () => {
+    setIsDrawerOpen(open);
+  };
   useEffect(() => {
-    const loadLanguages = async () => {
-      try {
-        const response = await import("../assets/languages.json");
-        setLanguages(response.languages);
-
-        const availableLanguages = response.languages.map((lang) => lang.code);
-        const browserLanguage = navigator.language.split("-")[0];
-
-        const cookieLanguage = document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("i18next="))
-          ?.split("=")[1];
-
-        const languageToSet =
-          cookieLanguage ||
-          (availableLanguages.includes(browserLanguage)
-            ? browserLanguage
-            : availableLanguages[0] || "pt");
-
-        setLanguage(languageToSet);
-      } catch (error) {
-        console.error("Erro ao carregar as línguas:", error);
-      }
-    };
-
-    loadLanguages();
+    loadLanguages(setLanguages, setLanguage);
   }, [i18n.language]);
 
   return (
@@ -70,14 +64,61 @@ export default function HeaderMobile() {
             </Typography>
           </Link>
         </Box>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ m: "15px" }}
+
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ m: "15px" }}
+            onClick={toggleDrawer(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+
+          <FormControl fullWidth sx={{ width: 40, mt: 1 }}>
+            <Select
+              labelId="LangSelectorLabel"
+              id="LangSelector"
+              onChange={(event) =>
+                handleLanguageChange(event, i18n, setLanguage)
+              }
+              value={language}
+              renderValue={() => null}
+              displayEmpty
+            >
+              {languages.map((lang) => (
+                <MenuItem key={lang.code} value={lang.code}>
+                  <Avatar
+                    sx={{ width: 24, height: 24 }}
+                    src={`/flags/${lang.flagCode.toLowerCase()}.svg`}
+                    alt={`${lang.name} Flag`}
+                  />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+
+        <Drawer
+          anchor="right"
+          open={isDrawerOpen}
+          onClose={toggleDrawer(false)}
         >
-          <MenuIcon />
-        </IconButton>
+          <Box
+            sx={{ width: 250 }}
+            role="presentation"
+            onClick={toggleDrawer(false)}
+          >
+            <List>
+              {menuItems.map((item, index) => (
+                <ListItem button component={Link} to={item.path} key={index}>
+                  <ListItemText primary={item.t} />
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </Drawer>
       </Box>
     </AppBar>
   );
