@@ -14,8 +14,8 @@ import {
   FormControl,
   Select,
   MenuItem,
-  Avatar,
 } from "@mui/material";
+import Flag from "react-world-flags";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import favicon from "../assets/favicon.svg";
@@ -76,24 +76,69 @@ export default function HeaderMobile() {
             <MenuIcon />
           </IconButton>
 
-          <FormControl fullWidth sx={{ width: 40, mt: 1 }}>
+          <FormControl fullWidth sx={{ width: 62, mt: 1 }}>
             <Select
               labelId="LangSelectorLabel"
               id="LangSelector"
               onChange={(event) =>
                 handleLanguageChange(event, i18n, setLanguage)
               }
-              value={language}
-              renderValue={() => null}
+              value={language || "pt"}
+              renderValue={(selected) => {
+                const selectedLang = languages.find(
+                  (lang) => lang.code === selected
+                );
+                if (!selectedLang) {
+                  return (
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Typography sx={{ fontWeight: "bold" }}>PT</Typography>
+                    </Box>
+                  );
+                }
+                return (
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Flag
+                      code={selectedLang.flagCode}
+                      style={{ width: 24, height: 24, marginRight: 4 }}
+                    />
+                    <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                      {selectedLang.code.toUpperCase()}
+                    </Typography>
+                  </Box>
+                );
+              }}
               displayEmpty
+              IconComponent={() => null}
+              sx={{
+                "& .MuiSelect-select": {
+                  paddingLeft: "30px",
+                  paddingRight: 0,
+                  fontSize: "1rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                },
+              }}
             >
               {languages.map((lang) => (
                 <MenuItem key={lang.code} value={lang.code}>
-                  <Avatar
-                    sx={{ width: 24, height: 24 }}
-                    src={`/flags/${lang.flagCode.toLowerCase()}.svg`}
-                    alt={`${lang.name} Flag`}
-                  />
+                  <Box display="flex" alignItems="center">
+                    <Flag
+                      code={lang.flagCode}
+                      style={{ width: 24, height: 24, marginRight: 8 }}
+                    />
+                    <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                      {lang.code.toUpperCase()}
+                    </Typography>
+                  </Box>
                 </MenuItem>
               ))}
             </Select>

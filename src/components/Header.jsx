@@ -26,6 +26,7 @@ import {
   useMenuItems,
 } from "../utils/Handlers";
 import MobileHeader from "./MobileHeader";
+import Flag from "react-world-flags";
 
 export default function Header() {
   const theme = createTheme();
@@ -113,7 +114,13 @@ export default function Header() {
               >
                 {languages.map((lang) => (
                   <MenuItem key={lang.code} value={lang.code}>
-                    {lang.name}
+                    <Box display="flex" alignItems="center">
+                      <Flag
+                        code={lang.flagCode}
+                        style={{ width: 24, marginRight: 8 }}
+                      />
+                      {lang.name}
+                    </Box>
                   </MenuItem>
                 ))}
               </Select>
