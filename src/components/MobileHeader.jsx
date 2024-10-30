@@ -44,12 +44,11 @@ export default function HeaderMobile() {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          margin: "0 auto",
           width: "100%",
-          maxWidth: "400px",
+          padding: "0 15px",
         }}
       >
-        <Box sx={{ m: "15px" }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           <Link to="/" className="text-reset">
             <img
               src={favicon}
@@ -58,14 +57,14 @@ export default function HeaderMobile() {
             />
             <Typography
               variant="h6"
-              sx={{ marginTop: "8px", fontSize: "16px" }}
+              sx={{ marginLeft: "8px", fontSize: "16px" }}
             >
               Hair Radiant
             </Typography>
           </Link>
         </Box>
 
-        <Box display="flex" flexDirection="column" alignItems="center">
+        <Box display="flex" alignItems="center">
           <IconButton
             edge="start"
             color="inherit"
