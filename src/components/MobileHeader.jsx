@@ -217,6 +217,32 @@ export default function HeaderMobile() {
             </Link>
           </Box>
         </Box>
+
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          gap={1}
+          sx={{
+            position: "absolute",
+            bottom: 10,
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
+          <img
+            src="path-to-designer-logo.png"
+            alt="Designer Logo"
+            style={{
+              width: "15vw",
+              maxWidth: 100,
+              minWidth: 50,
+            }}
+          />
+          <Typography variant="body2" color="black">
+            Mr WebCat
+          </Typography>
+        </Box>
       </Drawer>
     </Box>
   );

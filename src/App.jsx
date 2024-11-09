@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useTranslation } from "react-i18next";
 import { Typography, Box } from "@mui/material";
@@ -28,6 +29,8 @@ function App() {
       >
         {t("underdev")}
       </Typography>
+
+      <Footer />
     </Box>
   );
 }
