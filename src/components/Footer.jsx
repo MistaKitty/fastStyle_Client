@@ -23,9 +23,9 @@ export default function Footer() {
       position="fixed"
       sx={{
         top: "auto",
-        bottom: 0,
+        bottom: "0",
         width: "100%",
-        py: 2,
+        py: 1,
         backgroundColor: theme.palette.primary.main,
         boxShadow: "0px -4px 10px rgba(0, 0, 0, 0.3)",
       }}
@@ -39,9 +39,10 @@ export default function Footer() {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
-            gap: 3,
+            position: "relative",
           }}
         >
+          {/* Primeira box - Alinhada à esquerda */}
           <Box
             display="flex"
             flexDirection="column"
@@ -61,9 +62,11 @@ export default function Footer() {
           <Box
             display="flex"
             flexDirection="column"
-            justifyContent="center"
             alignItems="center"
             gap={2}
+            sx={{
+              margin: "0 auto",
+            }}
           >
             <Box display="flex" justifyContent="center" gap={3}>
               <Link
@@ -125,8 +128,9 @@ export default function Footer() {
             </Typography>
           </Box>
 
+          {/* Terceira box - Alinhada à direita */}
           <Box display="flex" alignItems="center">
-            <Typography variant="body2" color="white" mr={2}>
+            <Typography variant="body2" color="white">
               Pagamento seguro via Stripe
             </Typography>
           </Box>
