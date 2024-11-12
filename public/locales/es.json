@@ -1,17 +1,25 @@
 {
-  "underdev": "En desarrollo🚧🚧🚧🚧",
+  "title": "En desarrollo🚧🚧🚧🚧",
   "menu": {
-    "inicio": "Inicio",
-    "servicos": "Servicios & Precios",
-    "sobre": "Sobre nosotros",
-    "contato": "Contacto",
-    "galeria": "Galería",
+    "home": "Inicio",
+    "services": "Servicios & Precios",
+    "about": "Sobre nosotros",
+    "contact": "Contáctenos",
+    "gallery": "Galería",
     "blog": "Blog & consejos",
-    "recrutamento": "Reclutamiento"
+    "recruitment": "Reclutamiento"
   },
-  "botao": {
-    "lingua": "Idioma",
-    "registar": "Registrar",
-    "logar": "Entrar"
+  "language": "Idioma",
+  "register": "Registrar",
+  "login": "Iniciar sesión",
+  "loggingIn": "Iniciando sesión...",
+  "registering": "Registrando...",
+  "validation": {
+    "emailInvalid": "Correo electrónico ya registrado o inválido.",
+    "emailCheckError": "Error al verificar el correo electrónico.",
+    "passwordInvalid": "La contraseña no cumple con los requisitos.",
+    "passwordCheckError": "Error al verificar la contraseña.",
+    "phoneInvalid": "Teléfono móvil ya registrado o inválido.",
+    "phoneCheckError": "Error al verificar el teléfono móvil."
   }
 }

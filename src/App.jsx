@@ -27,7 +27,7 @@ function App() {
           wordWrap: "break-word",
         }}
       >
-        {t("underdev")}
+        {t("title")}
       </Typography>
 
       <Footer />

@@ -200,9 +200,13 @@ export default function HeaderMobile() {
                 size="small"
                 variant="contained"
                 startIcon={<PersonAddIcon />}
-                style={{ width: "100%" }}
+                sx={{
+                  width: "100%",
+                  fontSize: "0.75rem",
+                  whiteSpace: "nowrap",
+                }}
               >
-                {t("botao.registar")}
+                {t("register")}
               </Button>
             </Link>
             <Link to="/login" style={{ textDecoration: "none", flex: 1 }}>
@@ -210,9 +214,13 @@ export default function HeaderMobile() {
                 size="small"
                 variant="contained"
                 startIcon={<PersonAddIcon />}
-                style={{ width: "100%" }}
+                sx={{
+                  width: "100%",
+                  fontSize: "0.75rem",
+                  whiteSpace: "nowrap",
+                }}
               >
-                {t("botao.logar")}
+                {t("login")}
               </Button>
             </Link>
           </Box>

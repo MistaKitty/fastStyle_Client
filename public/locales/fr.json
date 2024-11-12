@@ -1,17 +1,25 @@
 {
-  "underdev": "En développement🚧🚧🚧🚧",
+  "title": "En développement🚧🚧🚧🚧",
   "menu": {
-    "inicio": "Accueil",
-    "servicos": "Services & Tarifs",
-    "sobre": "À propos de nous",
-    "contato": "Contact",
-    "galeria": "Galerie",
-    "blog": "Blog & conseils",
-    "recrutamento": "Recrutement"
+    "home": "Accueil",
+    "services": "Services & Tarifs",
+    "about": "À propos de nous",
+    "contact": "Nous contacter",
+    "gallery": "Galerie",
+    "blog": "Blog & astuces",
+    "recruitment": "Recrutement"
   },
-  "botao": {
-    "lingua": "Langue",
-    "registar": "S'inscrire",
-    "logar": "Entrer"
+  "language": "Langue",
+  "register": "S'inscrire",
+  "login": "Se connecter",
+  "loggingIn": "Connexion en cours...",
+  "registering": "Inscription en cours...",
+  "validation": {
+    "emailInvalid": "Email déjà enregistré ou invalide.",
+    "emailCheckError": "Erreur lors de la vérification de l'email.",
+    "passwordInvalid": "Le mot de passe ne respecte pas les exigences.",
+    "passwordCheckError": "Erreur lors de la vérification du mot de passe.",
+    "phoneInvalid": "Numéro de téléphone déjà enregistré ou invalide.",
+    "phoneCheckError": "Erreur lors de la vérification du numéro de téléphone."
   }
 }

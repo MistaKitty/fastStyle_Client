@@ -1,17 +1,25 @@
 {
-  "underdev": "Under development🚧🚧🚧🚧",
+  "title": "Under development🚧🚧🚧🚧",
   "menu": {
-    "inicio": "Home",
-    "servicos": "Services & Prices",
-    "sobre": "About us",
-    "contato": "Contact",
-    "galeria": "Gallery",
+    "home": "Home",
+    "services": "Services & Pricing",
+    "about": "About us",
+    "contact": "Contact us",
+    "gallery": "Gallery",
     "blog": "Blog & tips",
-    "recrutamento": "Recruitment"
+    "recruitment": "Recruitment"
   },
-  "botao": {
-    "lingua": "Language",
-    "registar": "Register",
-    "logar": "Login"
+  "language": "Language",
+  "register": "Register",
+  "login": "Login",
+  "loggingIn": "Logging in...",
+  "registering": "Registering...",
+  "validation": {
+    "emailInvalid": "Email already registered or invalid.",
+    "emailCheckError": "Error checking email.",
+    "passwordInvalid": "Password does not meet the requirements.",
+    "passwordCheckError": "Error checking password.",
+    "phoneInvalid": "Phone number already registered or invalid.",
+    "phoneCheckError": "Error checking phone number."
   }
 }

@@ -112,7 +112,7 @@ export default function Header() {
                 id="LangSelectorLabel"
                 sx={{ textAlign: "center", width: "100%" }}
               >
-                {t("botao.lingua")}
+                {t("lingua")}
               </InputLabel>
               <Select
                 labelId="LangSelectorLabel"
@@ -141,22 +141,32 @@ export default function Header() {
                   onClick={handleOpenDialog}
                   size="small"
                   loadingPosition="start"
-                  loadingIndicator="botao.registando"
+                  loadingIndicator="registando"
                   startIcon={<PersonAddIcon />}
                   variant="contained"
+                  sx={{
+                    width: "100%",
+                    fontSize: "0.75rem",
+                    whiteSpace: "nowrap",
+                  }}
                 >
-                  {t("botao.registar")}
+                  {t("register")}
                 </LoadingButton>
               </Link>
               <Link to="/login" style={{ textDecoration: "none", flex: 1 }}>
                 <LoadingButton
                   size="small"
                   loadingPosition="start"
-                  loadingIndicator="botao.logando"
+                  loadingIndicator="logando"
                   startIcon={<PersonAddIcon />}
                   variant="contained"
+                  sx={{
+                    width: "100%",
+                    fontSize: "0.75rem",
+                    whiteSpace: "nowrap",
+                  }}
                 >
-                  {t("botao.logar")}
+                  {t("login")}
                 </LoadingButton>
               </Link>
             </Box>
