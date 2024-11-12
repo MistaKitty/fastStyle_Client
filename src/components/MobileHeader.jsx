@@ -202,8 +202,10 @@ export default function HeaderMobile() {
                 startIcon={<PersonAddIcon />}
                 sx={{
                   width: "100%",
-                  fontSize: "0.75rem",
+                  minHeight: "36px",
+                  fontSize: t("login").length > 10 ? "0.65rem" : "0.75rem",
                   whiteSpace: "nowrap",
+                  fontWeight: "normal",
                 }}
               >
                 {t("register")}
@@ -216,8 +218,10 @@ export default function HeaderMobile() {
                 startIcon={<PersonAddIcon />}
                 sx={{
                   width: "100%",
-                  fontSize: "0.75rem",
+                  minHeight: "36px",
+                  fontSize: t("login").length > 10 ? "0.65rem" : "0.75rem",
                   whiteSpace: "nowrap",
+                  fontWeight: "normal",
                 }}
               >
                 {t("login")}
