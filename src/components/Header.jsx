@@ -14,6 +14,7 @@ import {
   useMediaQuery,
   createTheme,
   Typography,
+  Dialog,
 } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -27,6 +28,7 @@ import {
 } from "../utils/Handlers";
 import MobileHeader from "./MobileHeader";
 import Flag from "react-world-flags";
+import Register from "./Register";
 
 export default function Header() {
   const theme = createTheme();
@@ -37,10 +39,18 @@ export default function Header() {
   const [languages, setLanguages] = useState([]);
   const [language, setLanguage] = useState("");
   const menuItems = useMenuItems();
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     loadLanguages(setLanguages, setLanguage);
   }, [i18n.language]);
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
   const renderButtons = () =>
     menuItems.map((item, index) => (
@@ -128,6 +138,7 @@ export default function Header() {
             <Box sx={{ m: 1, display: "flex", gap: 1 }}>
               <Link to="/registar" style={{ textDecoration: "none", flex: 1 }}>
                 <LoadingButton
+                  onClick={handleOpenDialog}
                   size="small"
                   loadingPosition="start"
                   loadingIndicator="botao.registando"
@@ -152,6 +163,9 @@ export default function Header() {
           </Box>
         </Toolbar>
       )}
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <Register />
+      </Dialog>
     </AppBar>
   );
 }
