@@ -69,7 +69,7 @@ const Register = () => {
       {step === 1 && (
         <>
           <TextField
-            label="Email"
+            label={t("email")}
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -85,7 +85,7 @@ const Register = () => {
             color="primary"
             onClick={handleNextStep}
           >
-            Próximo
+            {t("next")}
           </Button>
         </>
       )}
@@ -93,7 +93,7 @@ const Register = () => {
       {step === 2 && (
         <>
           <TextField
-            label="Senha"
+            label={t("password")}
             name="password"
             value={formData.password}
             onChange={handleChange}
@@ -104,7 +104,7 @@ const Register = () => {
             helperText={errors.password}
           />
           <TextField
-            label="Confirmar Senha"
+            label={t("confirmPassword")}
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
@@ -114,7 +114,7 @@ const Register = () => {
             error={formData.password !== formData.confirmPassword}
             helperText={
               formData.password !== formData.confirmPassword
-                ? "As senhas não coincidem"
+                ? t("passwordMismatch")
                 : ""
             }
           />
@@ -125,7 +125,7 @@ const Register = () => {
             onClick={handleNextStep}
             disabled={formData.password !== formData.confirmPassword}
           >
-            Próximo
+            {t("next")}
           </Button>
         </>
       )}
@@ -133,7 +133,7 @@ const Register = () => {
       {step === 3 && (
         <>
           <TextField
-            label="Telemóvel (Opcional)"
+            label={t("phoneOptional")}
             name="phone"
             value={formData.phone}
             onChange={handleChange}
@@ -143,7 +143,7 @@ const Register = () => {
             helperText={errors.phone}
           />
           <Button type="submit" variant="contained" color="primary">
-            Registrar
+            {t("register")}
           </Button>
         </>
       )}

@@ -21,5 +21,11 @@
     "passwordCheckError": "Erro ao verificar senha.",
     "phoneInvalid": "Telemóvel já registado ou inválido.",
     "phoneCheckError": "Erro ao verificar telemóvel."
-  }
+  },
+  "email": "Email",
+  "password": "Senha",
+  "confirmPassword": "Confirmar Senha",
+  "phoneOptional": "Telemóvel (Opcional)",
+  "next": "Próximo",
+  "passwordMismatch": "As senhas não coincidem"
 }

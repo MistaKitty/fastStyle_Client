@@ -21,5 +21,11 @@
     "passwordCheckError": "Error checking password.",
     "phoneInvalid": "Phone number already registered or invalid.",
     "phoneCheckError": "Error checking phone number."
-  }
+  },
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "phoneOptional": "Phone (Optional)",
+  "next": "Next",
+  "passwordMismatch": "Passwords do not match"
 }

@@ -21,5 +21,11 @@
     "passwordCheckError": "Erreur lors de la vérification du mot de passe.",
     "phoneInvalid": "Numéro de téléphone déjà enregistré ou invalide.",
     "phoneCheckError": "Erreur lors de la vérification du numéro de téléphone."
-  }
+  },
+  "email": "Email",
+  "password": "Mot de passe",
+  "confirmPassword": "Confirmer le mot de passe",
+  "phoneOptional": "Téléphone (Optionnel)",
+  "next": "Suivant",
+  "passwordMismatch": "Les mots de passe ne correspondent pas"
 }

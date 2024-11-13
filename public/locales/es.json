@@ -21,5 +21,11 @@
     "passwordCheckError": "Error al verificar la contraseña.",
     "phoneInvalid": "Teléfono móvil ya registrado o inválido.",
     "phoneCheckError": "Error al verificar el teléfono móvil."
-  }
+  },
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "confirmPassword": "Confirmar Contraseña",
+  "phoneOptional": "Teléfono (Opcional)",
+  "next": "Siguiente",
+  "passwordMismatch": "Las contraseñas no coinciden"
 }
