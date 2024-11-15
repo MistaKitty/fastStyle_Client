@@ -1,6 +1,111 @@
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-// Language logic
+
+// ----------------------------- API Logic -----------------------------
+
+const apiBaseURL =
+  import.meta.env.VITE_REMOTE === "true"
+    ? import.meta.env.VITE_APIREMOTE
+    : import.meta.env.VITE_APILOCAL;
+
+axios.defaults.baseURL = apiBaseURL;
+
+const handleApiRequest = async (
+  endpoint,
+  field,
+  value,
+  setErrors,
+  errorMessage
+) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = useTranslation();
+  try {
+    const response = await axios.post(endpoint, { [field]: value });
+    if (!response.data.isValid) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [field]:
+          response.data.message || t(errorMessage) || `${field} is invalid.`,
+      }));
+      return false;
+    }
+    return true;
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.message ||
+      t(`${field}CheckError`) ||
+      `Error verifying ${field}.`;
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [field]: errorMsg,
+    }));
+    return false;
+  }
+};
+
+export const validateField = async (field, value, setErrors) => {
+  const endpoints = {
+    email: "/api/validate-email",
+    password: "/api/validate-password",
+    phone: "/api/validate-phone",
+  };
+
+  const errorMessages = {
+    email: "validation.emailInvalid",
+    password: "validation.passwordInvalid",
+    phone: "validation.phoneInvalid",
+  };
+
+  return handleApiRequest(
+    endpoints[field],
+    field,
+    value,
+    setErrors,
+    errorMessages[field]
+  );
+};
+
+export const validateEmail = async (email, setErrors) => {
+  return handleApiRequest(
+    "/api/validate-email",
+    "email",
+    email,
+    setErrors,
+    "validation.emailInvalid"
+  );
+};
+
+export const registerUser = async (userData, setErrors) => {
+  try {
+    const response = await axios.post("/api/users/register", userData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.data.success) {
+      return true;
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: response.data.message || "Erro durante o registo.",
+      }));
+      return false;
+    }
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.message || "Erro ao conectar com o servidor.";
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      email: errorMsg,
+    }));
+    return false;
+  }
+};
+
+// ----------------------------- Language Logic -----------------------------
+
 export const loadLanguages = async (setLanguages, setLanguage) => {
   try {
     const response = await import("../assets/languages.json");
@@ -22,7 +127,7 @@ export const loadLanguages = async (setLanguages, setLanguage) => {
 
     setLanguage(languageToSet);
   } catch (error) {
-    console.error("Erro ao carregar as línguas:", error);
+    console.error("Error loading languages:", error);
   }
 };
 
@@ -31,7 +136,29 @@ export const handleLanguageChange = (event, i18n, setLanguage) => {
   i18n.changeLanguage(selectedLanguage);
   setLanguage(selectedLanguage);
 };
-//Menu logic
+
+// ----------------------------- Menu Logic -----------------------------
+
+export const validatePassword = async (password, setErrors) => {
+  return handleApiRequest(
+    "/api/validate-password",
+    "password",
+    password,
+    setErrors,
+    "validation.passwordInvalid"
+  );
+};
+
+export const validatePhone = async (phone, setErrors) => {
+  return handleApiRequest(
+    "/api/validate-phone",
+    "phone",
+    phone,
+    setErrors,
+    "validation.phoneInvalid"
+  );
+};
+
 export const handleMouseEnter = (index, location, items, buttonRefs) => {
   if (location && location.pathname !== items[index].path) {
     buttonRefs.current[index].style.backgroundColor = "rgba(0, 0, 0, 0.1)";
@@ -71,12 +198,12 @@ export const useMenuItems = () => {
 
   return [
     { key: "menu.home", path: "/" },
-    { key: "menu.services", path: "/servicos" },
-    { key: "menu.about", path: "/sobre" },
-    { key: "menu.contact", path: "/contato" },
-    { key: "menu.gallery", path: "/galeria" },
+    { key: "menu.services", path: "/services" },
+    { key: "menu.about", path: "/about" },
+    { key: "menu.contact", path: "/contact" },
+    { key: "menu.gallery", path: "/gallery" },
     { key: "menu.blog", path: "/blog" },
-    { key: "menu.recruitment", path: "/recrutamento" },
+    { key: "menu.recruitment", path: "/recruitment" },
   ].map((item) => ({ ...item, t: t(item.key) }));
 };
 
@@ -105,93 +232,4 @@ export const handleButtonClick = (index, setActiveIndex, buttonRefs) => {
   buttonRefs.current.forEach((ref, idx) => {
     ref.style.backgroundColor = idx === index ? "rgba(0, 0, 0, 0.2)" : "";
   });
-};
-//Register logic
-
-export const validateEmail = async (email, setErrors) => {
-  const { t } = useTranslation();
-
-  try {
-    const response = await axios.post("/api/validate-email", { email });
-    if (!response.data.isValid) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        email:
-          response.data.message ||
-          t("validation.emailInvalid") ||
-          "Email já registado ou inválido.",
-      }));
-      return false;
-    }
-    return true;
-  } catch (error) {
-    const errorMessage =
-      error.response?.data?.message ||
-      t("validation.emailCheckError") ||
-      "Erro ao verificar email.";
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      email: errorMessage,
-    }));
-    return false;
-  }
-};
-
-export const validatePassword = async (password, setErrors) => {
-  const { t } = useTranslation();
-
-  try {
-    const response = await axios.post("/api/validate-password", { password });
-    if (!response.data.isValid) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        password:
-          response.data.message ||
-          t("validation.passwordInvalid") ||
-          "Senha não atende os requisitos.",
-      }));
-      return false;
-    }
-    return true;
-  } catch (error) {
-    const errorMessage =
-      error.response?.data?.message ||
-      t("validation.passwordCheckError") ||
-      "Erro ao verificar senha.";
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      password: errorMessage,
-    }));
-    return false;
-  }
-};
-
-export const validatePhone = async (phone, setErrors) => {
-  const { t } = useTranslation();
-
-  if (phone.trim() === "") return true;
-  try {
-    const response = await axios.post("/api/validate-phone", { phone });
-    if (!response.data.isValid) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        phone:
-          response.data.message ||
-          t("validation.phoneInvalid") ||
-          "Telemóvel já registado ou inválido.",
-      }));
-      return false;
-    }
-    return true;
-  } catch (error) {
-    const errorMessage =
-      error.response?.data?.message ||
-      t("validation.phoneCheckError") ||
-      "Erro ao verificar telemóvel.";
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      phone: errorMessage,
-    }));
-    return false;
-  }
 };

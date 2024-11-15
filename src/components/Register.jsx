@@ -5,6 +5,7 @@ import {
   validateEmail,
   validatePassword,
   validatePhone,
+  registerUser,
 } from "../utils/Handlers";
 import { useTranslation } from "react-i18next";
 
@@ -83,7 +84,12 @@ const Register = () => {
             type="button"
             variant="contained"
             color="primary"
-            onClick={handleNextStep}
+            onClick={async () => {
+              const isRegistered = await registerUser(formData, setErrors);
+              if (isRegistered) {
+                handleNextStep();
+              }
+            }}
           >
             {t("next")}
           </Button>
