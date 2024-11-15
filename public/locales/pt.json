@@ -27,5 +27,16 @@
   "confirmPassword": "Confirmar Senha",
   "phoneOptional": "Telemóvel (Opcional)",
   "next": "Próximo",
-  "passwordMismatch": "As senhas não coincidem"
+  "passwordMismatch": "As senhas não coincidem",
+
+  "error": {
+    "emailInvalid": "Por favor, insira um e-mail válido.",
+    "emailExists": "Este e-mail já está registrado.",
+    "emailRequired": "O e-mail é obrigatório.",
+    "userCreationFailed": "Erro ao criar o usuário."
+  },
+  "success": {
+    "userCreated": "Usuário criado com sucesso.",
+    "emailValid": "E-mail válido e disponível."
+  }
 }

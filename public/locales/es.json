@@ -6,26 +6,36 @@
     "about": "Sobre nosotros",
     "contact": "Contáctenos",
     "gallery": "Galería",
-    "blog": "Blog & consejos",
+    "blog": "Blog & Consejos",
     "recruitment": "Reclutamiento"
   },
   "language": "Idioma",
-  "register": "Registrar",
+  "register": "Registrarse",
   "login": "Iniciar sesión",
   "loggingIn": "Iniciando sesión...",
   "registering": "Registrando...",
   "validation": {
-    "emailInvalid": "Correo electrónico ya registrado o inválido.",
-    "emailCheckError": "Error al verificar el correo electrónico.",
+    "emailInvalid": "El email ya está registrado o es inválido.",
+    "emailCheckError": "Error al verificar el email.",
     "passwordInvalid": "La contraseña no cumple con los requisitos.",
     "passwordCheckError": "Error al verificar la contraseña.",
-    "phoneInvalid": "Teléfono móvil ya registrado o inválido.",
-    "phoneCheckError": "Error al verificar el teléfono móvil."
+    "phoneInvalid": "El número de teléfono ya está registrado o es inválido.",
+    "phoneCheckError": "Error al verificar el número de teléfono."
   },
-  "email": "Correo electrónico",
+  "email": "Email",
   "password": "Contraseña",
   "confirmPassword": "Confirmar Contraseña",
   "phoneOptional": "Teléfono (Opcional)",
   "next": "Siguiente",
-  "passwordMismatch": "Las contraseñas no coinciden"
+  "passwordMismatch": "Las contraseñas no coinciden",
+  "error": {
+    "emailInvalid": "Por favor, ingrese un email válido.",
+    "emailExists": "Este email ya está registrado.",
+    "emailRequired": "El email es obligatorio.",
+    "userCreationFailed": "Error al crear el usuario."
+  },
+  "success": {
+    "userCreated": "Usuario creado con éxito.",
+    "emailValid": "Email válido y disponible."
+  }
 }

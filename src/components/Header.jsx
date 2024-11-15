@@ -112,7 +112,7 @@ export default function Header() {
                 id="LangSelectorLabel"
                 sx={{ textAlign: "center", width: "100%" }}
               >
-                {t("lingua")}
+                {t("language")}
               </InputLabel>
               <Select
                 labelId="LangSelectorLabel"

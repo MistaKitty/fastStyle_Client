@@ -4,28 +4,38 @@
     "home": "Accueil",
     "services": "Services & Tarifs",
     "about": "À propos de nous",
-    "contact": "Nous contacter",
+    "contact": "Contactez-nous",
     "gallery": "Galerie",
-    "blog": "Blog & astuces",
+    "blog": "Blog & Astuces",
     "recruitment": "Recrutement"
   },
   "language": "Langue",
   "register": "S'inscrire",
   "login": "Se connecter",
   "loggingIn": "Connexion en cours...",
-  "registering": "Inscription en cours...",
+  "registering": "Enregistrement en cours...",
   "validation": {
-    "emailInvalid": "Email déjà enregistré ou invalide.",
+    "emailInvalid": "L'email est déjà enregistré ou invalide.",
     "emailCheckError": "Erreur lors de la vérification de l'email.",
     "passwordInvalid": "Le mot de passe ne respecte pas les exigences.",
     "passwordCheckError": "Erreur lors de la vérification du mot de passe.",
-    "phoneInvalid": "Numéro de téléphone déjà enregistré ou invalide.",
+    "phoneInvalid": "Le numéro de téléphone est déjà enregistré ou invalide.",
     "phoneCheckError": "Erreur lors de la vérification du numéro de téléphone."
   },
   "email": "Email",
   "password": "Mot de passe",
   "confirmPassword": "Confirmer le mot de passe",
-  "phoneOptional": "Téléphone (Optionnel)",
+  "phoneOptional": "Téléphone (facultatif)",
   "next": "Suivant",
-  "passwordMismatch": "Les mots de passe ne correspondent pas"
+  "passwordMismatch": "Les mots de passe ne correspondent pas",
+  "error": {
+    "emailInvalid": "Veuillez entrer un email valide.",
+    "emailExists": "Cet email est déjà enregistré.",
+    "emailRequired": "L'email est requis.",
+    "userCreationFailed": "Erreur lors de la création de l'utilisateur."
+  },
+  "success": {
+    "userCreated": "Utilisateur créé avec succès.",
+    "emailValid": "Email valide et disponible."
+  }
 }

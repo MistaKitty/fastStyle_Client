@@ -1,0 +1,41 @@
+{
+  "title": "In sviluppo🚧🚧🚧🚧",
+  "menu": {
+    "home": "Home",
+    "services": "Servizi & Prezzi",
+    "about": "Chi siamo",
+    "contact": "Contattaci",
+    "gallery": "Galleria",
+    "blog": "Blog & Consigli",
+    "recruitment": "Reclutamento"
+  },
+  "language": "Lingua",
+  "register": "Registrati",
+  "login": "Accedi",
+  "loggingIn": "Accesso in corso...",
+  "registering": "Registrazione in corso...",
+  "validation": {
+    "emailInvalid": "L'email è già registrata o non valida.",
+    "emailCheckError": "Errore durante la verifica dell'email.",
+    "passwordInvalid": "La password non soddisfa i requisiti.",
+    "passwordCheckError": "Errore durante la verifica della password.",
+    "phoneInvalid": "Il numero di telefono è già registrato o non valido.",
+    "phoneCheckError": "Errore durante la verifica del numero di telefono."
+  },
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Conferma password",
+  "phoneOptional": "Telefono (Opzionale)",
+  "next": "Avanti",
+  "passwordMismatch": "Le password non corrispondono",
+  "error": {
+    "emailInvalid": "Per favore, inserisci un'email valida.",
+    "emailExists": "Questa email è già registrata.",
+    "emailRequired": "L'email è obbligatoria.",
+    "userCreationFailed": "Errore nella creazione dell'utente."
+  },
+  "success": {
+    "userCreated": "Utente creato con successo.",
+    "emailValid": "Email valida e disponibile."
+  }
+}

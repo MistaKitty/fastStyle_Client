@@ -1,12 +1,12 @@
 {
-  "title": "Under development🚧🚧🚧🚧",
+  "title": "In Development🚧🚧🚧🚧",
   "menu": {
     "home": "Home",
-    "services": "Services & Pricing",
-    "about": "About us",
-    "contact": "Contact us",
+    "services": "Services & Prices",
+    "about": "About Us",
+    "contact": "Contact Us",
     "gallery": "Gallery",
-    "blog": "Blog & tips",
+    "blog": "Blog & Tips",
     "recruitment": "Recruitment"
   },
   "language": "Language",
@@ -15,11 +15,11 @@
   "loggingIn": "Logging in...",
   "registering": "Registering...",
   "validation": {
-    "emailInvalid": "Email already registered or invalid.",
+    "emailInvalid": "Email is already registered or invalid.",
     "emailCheckError": "Error checking email.",
     "passwordInvalid": "Password does not meet the requirements.",
     "passwordCheckError": "Error checking password.",
-    "phoneInvalid": "Phone number already registered or invalid.",
+    "phoneInvalid": "Phone number is already registered or invalid.",
     "phoneCheckError": "Error checking phone number."
   },
   "email": "Email",
@@ -27,5 +27,15 @@
   "confirmPassword": "Confirm Password",
   "phoneOptional": "Phone (Optional)",
   "next": "Next",
-  "passwordMismatch": "Passwords do not match"
+  "passwordMismatch": "Passwords do not match",
+  "error": {
+    "emailInvalid": "Please enter a valid email.",
+    "emailExists": "This email is already registered.",
+    "emailRequired": "Email is required.",
+    "userCreationFailed": "Error creating user."
+  },
+  "success": {
+    "userCreated": "User created successfully.",
+    "emailValid": "Email is valid and available."
+  }
 }
