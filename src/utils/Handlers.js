@@ -1,107 +1,49 @@
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 
-// ----------------------------- API Logic -----------------------------
+// ----------------------------- Local || Remote Logic -----------------------------
 
-const apiBaseURL =
-  import.meta.env.VITE_REMOTE === "true"
+const getApiBaseUrl = () => {
+  const isRemote = import.meta.env.VITE_REMOTE === "true";
+  return isRemote
     ? import.meta.env.VITE_APIREMOTE
     : import.meta.env.VITE_APILOCAL;
-
-axios.defaults.baseURL = apiBaseURL;
-
-const handleApiRequest = async (
-  endpoint,
-  field,
-  value,
-  setErrors,
-  errorMessage
-) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { t } = useTranslation();
+};
+const baseUrl = getApiBaseUrl();
+// ----------------------------- API Logic -----------------------------
+const handleApiRequest = async (email, setErrors, errorMessage, t) => {
   try {
-    const response = await axios.post(endpoint, { [field]: value });
-    if (!response.data.isValid) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [field]:
-          response.data.message || t(errorMessage) || `${field} is invalid.`,
-      }));
-      return false;
-    }
-    return true;
-  } catch (error) {
-    const errorMsg =
-      error.response?.data?.message ||
-      t(`${field}CheckError`) ||
-      `Error verifying ${field}.`;
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [field]: errorMsg,
-    }));
-    return false;
-  }
-};
-
-export const validateField = async (field, value, setErrors) => {
-  const endpoints = {
-    email: "/api/validate-email",
-    password: "/api/validate-password",
-    phone: "/api/validate-phone",
-  };
-
-  const errorMessages = {
-    email: "validation.emailInvalid",
-    password: "validation.passwordInvalid",
-    phone: "validation.phoneInvalid",
-  };
-
-  return handleApiRequest(
-    endpoints[field],
-    field,
-    value,
-    setErrors,
-    errorMessages[field]
-  );
-};
-
-export const validateEmail = async (email, setErrors) => {
-  return handleApiRequest(
-    "/api/validate-email",
-    "email",
-    email,
-    setErrors,
-    "validation.emailInvalid"
-  );
-};
-
-export const registerUser = async (userData, setErrors) => {
-  try {
-    const response = await axios.post("/api/users/register", userData, {
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const response = await axios.post(`${baseUrl}/api/users/validate-email`, {
+      email,
     });
 
-    if (response.data.success) {
-      return true;
-    } else {
+    if (!response.data.isValid) {
+      const messageKey = response.data.message || errorMessage;
       setErrors((prevErrors) => ({
         ...prevErrors,
-        email: response.data.message || "Erro durante o registo.",
+        email: t(messageKey) || "Email is invalid.",
       }));
       return false;
     }
+
+    return true;
   } catch (error) {
+    const fallbackKey = "validation.emailCheckError";
     const errorMsg =
-      error.response?.data?.message || "Erro ao conectar com o servidor.";
+      t(error.response?.data?.message || fallbackKey) ||
+      "Error verifying email.";
 
     setErrors((prevErrors) => ({
       ...prevErrors,
       email: errorMsg,
     }));
+
     return false;
   }
+};
+
+export const validateEmail = async (email, setErrors, t) => {
+  return handleApiRequest(email, setErrors, "validation.emailInvalid", t);
 };
 
 // ----------------------------- Language Logic -----------------------------

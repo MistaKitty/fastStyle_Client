@@ -1,22 +1,17 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
-import {
-  validateEmail,
-  validatePassword,
-  validatePhone,
-  registerUser,
-} from "../utils/Handlers";
+import { validateEmail } from "../utils/Handlers";
 import { useTranslation } from "react-i18next";
 
 const Register = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
     phone: "",
   });
-  const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({ email: "", password: "", phone: "" });
 
@@ -31,18 +26,26 @@ const Register = () => {
   };
 
   const handleNextStep = async () => {
-    if (step === 1 && (await validateEmail(formData.email, setErrors)))
-      setStep(2);
-    else if (
-      step === 2 &&
-      (await validatePassword(formData.password, setErrors))
-    )
-      setStep(3);
+    if (step === 1) {
+      const isEmailValid = await validateEmail(formData.email, setErrors, t);
+      if (isEmailValid) {
+        setStep(2);
+      }
+    } else if (step === 2) {
+      if (formData.password === formData.confirmPassword) {
+        setStep(3);
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          password: t("passwordMismatch"),
+        }));
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (await validatePhone(formData.phone, setErrors)) {
+    if (await validatePhone(formData.phone, setErrors, t)) {
       console.log("Form Submitted:", formData);
     }
   };
@@ -84,12 +87,7 @@ const Register = () => {
             type="button"
             variant="contained"
             color="primary"
-            onClick={async () => {
-              const isRegistered = await registerUser(formData, setErrors);
-              if (isRegistered) {
-                handleNextStep();
-              }
-            }}
+            onClick={handleNextStep}
           >
             {t("next")}
           </Button>
