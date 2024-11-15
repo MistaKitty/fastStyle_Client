@@ -175,3 +175,5 @@ export const handleButtonClick = (index, setActiveIndex, buttonRefs) => {
     ref.style.backgroundColor = idx === index ? "rgba(0, 0, 0, 0.2)" : "";
   });
 };
+
+// ----------------------------- Other button Logic -----------------------------

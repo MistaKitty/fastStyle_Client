@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { validateEmail } from "../utils/Handlers";
 import { useTranslation } from "react-i18next";
 
@@ -14,6 +15,7 @@ const Register = () => {
   });
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({ email: "", password: "", phone: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +25,18 @@ const Register = () => {
     }));
     if (errors[name])
       setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+  };
+
+  // ----------------------------- Handlers Logic -----------------------------
+
+  const handleLoadClick = async () => {
+    setLoading(true);
+    const isValid = await validateEmail(formData.email, setErrors, t);
+    setLoading(false);
+
+    if (isValid) {
+      setStep(2);
+    }
   };
 
   const handleNextStep = async () => {
@@ -50,6 +64,7 @@ const Register = () => {
     }
   };
 
+  // ----------------------------- Website Logic -----------------------------
   return (
     <Box
       component="form"
@@ -83,14 +98,16 @@ const Register = () => {
             error={!!errors.email}
             helperText={errors.email}
           />
-          <Button
-            type="button"
+          <LoadingButton
+            loading={loading}
+            loadingIndicator="Loading..."
             variant="contained"
             color="primary"
-            onClick={handleNextStep}
+            onClick={handleLoadClick}
+            disabled={loading}
           >
             {t("next")}
-          </Button>
+          </LoadingButton>
         </>
       )}
 
