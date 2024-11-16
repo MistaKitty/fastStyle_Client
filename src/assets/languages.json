@@ -1,6 +1,11 @@
 {
   "languages": [
     {
+      "code": "pt",
+      "name": "Português",
+      "flagCode": "PT"
+    },
+    {
       "code": "en",
       "name": "English",
       "flagCode": "GB"
@@ -34,11 +39,6 @@
       "code": "bn",
       "name": "বাংলা",
       "flagCode": "BD"
-    },
-    {
-      "code": "pt",
-      "name": "Português",
-      "flagCode": "PT"
     },
     {
       "code": "ru",
