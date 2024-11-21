@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import { LoadingButton } from "@mui/lab";
 import { validateEmail } from "../utils/Handlers";
 import { useTranslation } from "react-i18next";
@@ -100,7 +101,22 @@ const Register = () => {
           />
           <LoadingButton
             loading={loading}
-            loadingIndicator="Loading..."
+            loadingIndicator={
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <CircularProgress
+                  size={16}
+                  color="inherit"
+                  style={{ marginRight: 8 }}
+                />
+                {t("verify")}
+              </div>
+            }
             variant="contained"
             color="primary"
             onClick={handleLoadClick}

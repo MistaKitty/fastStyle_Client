@@ -14,6 +14,7 @@
   "login": "Войти",
   "loggingIn": "Вход в систему...",
   "registering": "Регистрация...",
+  "verify": "Проверка...",
   "validation": {
     "emailInvalid": "Email уже зарегистрирован или недействителен.",
     "emailCheckError": "Ошибка при проверке email.",

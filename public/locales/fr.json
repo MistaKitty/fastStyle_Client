@@ -14,6 +14,7 @@
   "login": "Se connecter",
   "loggingIn": "Connexion en cours...",
   "registering": "Enregistrement en cours...",
+  "verify": "Vérification en cours...",
   "validation": {
     "emailInvalid": "L'email est déjà enregistré ou invalide.",
     "emailCheckError": "Erreur lors de la vérification de l'email.",

@@ -14,6 +14,7 @@
   "login": "Login",
   "loggingIn": "Logging in...",
   "registering": "Registering...",
+  "verify": "Verifying...",
   "validation": {
     "emailInvalid": "Email is already registered or invalid.",
     "emailCheckError": "Error checking email.",

@@ -14,6 +14,7 @@
   "login": "Iniciar sesión",
   "loggingIn": "Iniciando sesión...",
   "registering": "Registrando...",
+  "verify": "Verificando...",
   "validation": {
     "emailInvalid": "El email ya está registrado o es inválido.",
     "emailCheckError": "Error al verificar el email.",

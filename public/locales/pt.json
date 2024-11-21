@@ -14,6 +14,7 @@
   "login": "Entrar",
   "loggingIn": "A entrar...",
   "registering": "A registar...",
+  "verify": "A verificar...",
   "validation": {
     "emailInvalid": "Email já registado ou inválido.",
     "emailCheckError": "Erro ao verificar email.",
