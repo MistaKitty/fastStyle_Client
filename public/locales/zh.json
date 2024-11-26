@@ -2,11 +2,11 @@
   "title": "开发中🚧🚧🚧🚧",
   "menu": {
     "home": "首页",
-    "services": "服务与价格",
+    "services": "服务与定价",
     "about": "关于我们",
     "contact": "联系我们",
     "gallery": "画廊",
-    "blog": "博客与提示",
+    "blog": "博客与建议",
     "recruitment": "招聘"
   },
   "language": "语言",
@@ -14,29 +14,29 @@
   "login": "登录",
   "loggingIn": "正在登录...",
   "registering": "正在注册...",
-  "verify": "正在验证...",
+  "verify": "验证中...",
   "validation": {
     "emailInvalid": "电子邮件已注册或无效。",
-    "emailCheckError": "验证电子邮件时出错。",
+    "emailCheckError": "电子邮件验证错误。",
     "passwordInvalid": "密码不符合要求。",
-    "passwordCheckError": "验证密码时出错。",
-    "phoneInvalid": "手机号已注册或无效。",
-    "phoneCheckError": "验证手机号时出错。"
+    "passwordCheckError": "密码验证错误。",
+    "phoneInvalid": "电话号码已注册或无效。",
+    "phoneCheckError": "电话号码验证错误。"
   },
   "email": "电子邮件",
   "password": "密码",
   "confirmPassword": "确认密码",
-  "phoneOptional": "手机号码（可选）",
+  "phoneOptional": "电话（可选）",
   "next": "下一步",
   "passwordMismatch": "密码不匹配",
   "error": {
-    "emailInvalid": "请输入有效的电子邮件。",
+    "emailInvalid": "请输入有效的电子邮件地址。",
     "emailExists": "该电子邮件已注册。",
     "emailRequired": "电子邮件是必需的。",
-    "userCreationFailed": "创建用户时出错。"
+    "tooManyRequests": "请求过多。请稍后再试。"
   },
   "success": {
-    "userCreated": "用户创建成功。",
+    "userCreated": "用户成功创建。",
     "emailValid": "电子邮件有效且可用。"
   }
 }

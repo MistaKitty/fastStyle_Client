@@ -2,41 +2,41 @@
   "title": "En desarrollo🚧🚧🚧🚧",
   "menu": {
     "home": "Inicio",
-    "services": "Servicios & Precios",
-    "about": "Sobre nosotros",
+    "services": "Servicios y Precios",
+    "about": "Sobre Nosotros",
     "contact": "Contáctenos",
     "gallery": "Galería",
-    "blog": "Blog & Consejos",
+    "blog": "Blog y Consejos",
     "recruitment": "Reclutamiento"
   },
   "language": "Idioma",
-  "register": "Registrarse",
+  "register": "Registrar",
   "login": "Iniciar sesión",
   "loggingIn": "Iniciando sesión...",
   "registering": "Registrando...",
   "verify": "Verificando...",
   "validation": {
-    "emailInvalid": "El email ya está registrado o es inválido.",
-    "emailCheckError": "Error al verificar el email.",
+    "emailInvalid": "Correo electrónico ya registrado o inválido.",
+    "emailCheckError": "Error al verificar el correo electrónico.",
     "passwordInvalid": "La contraseña no cumple con los requisitos.",
     "passwordCheckError": "Error al verificar la contraseña.",
-    "phoneInvalid": "El número de teléfono ya está registrado o es inválido.",
-    "phoneCheckError": "Error al verificar el número de teléfono."
+    "phoneInvalid": "El teléfono móvil ya está registrado o es inválido.",
+    "phoneCheckError": "Error al verificar el teléfono móvil."
   },
-  "email": "Email",
+  "email": "Correo Electrónico",
   "password": "Contraseña",
   "confirmPassword": "Confirmar Contraseña",
   "phoneOptional": "Teléfono (Opcional)",
   "next": "Siguiente",
   "passwordMismatch": "Las contraseñas no coinciden",
   "error": {
-    "emailInvalid": "Por favor, ingrese un email válido.",
-    "emailExists": "Este email ya está registrado.",
-    "emailRequired": "El email es obligatorio.",
-    "userCreationFailed": "Error al crear el usuario."
+    "emailInvalid": "Por favor, ingrese un correo electrónico válido.",
+    "emailExists": "Este correo electrónico ya está registrado.",
+    "emailRequired": "El correo electrónico es obligatorio.",
+    "tooManyRequests": "Demasiados intentos. Inténtalo de nuevo en unos minutos"
   },
   "success": {
-    "userCreated": "Usuario creado con éxito.",
-    "emailValid": "Email válido y disponible."
+    "userCreated": "Usuario creado exitosamente.",
+    "emailValid": "Correo electrónico válido y disponible."
   }
 }

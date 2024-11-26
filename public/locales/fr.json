@@ -6,7 +6,7 @@
     "about": "À propos de nous",
     "contact": "Contactez-nous",
     "gallery": "Galerie",
-    "blog": "Blog & Astuces",
+    "blog": "Blog & Conseils",
     "recruitment": "Recrutement"
   },
   "language": "Langue",
@@ -21,7 +21,7 @@
     "passwordInvalid": "Le mot de passe ne respecte pas les exigences.",
     "passwordCheckError": "Erreur lors de la vérification du mot de passe.",
     "phoneInvalid": "Le numéro de téléphone est déjà enregistré ou invalide.",
-    "phoneCheckError": "Erreur lors de la vérification du numéro de téléphone."
+    "phoneCheckError": "Erreur lors de la vérification du téléphone."
   },
   "email": "Email",
   "password": "Mot de passe",
@@ -33,7 +33,7 @@
     "emailInvalid": "Veuillez entrer un email valide.",
     "emailExists": "Cet email est déjà enregistré.",
     "emailRequired": "L'email est requis.",
-    "userCreationFailed": "Erreur lors de la création de l'utilisateur."
+    "tooManyRequests": "Trop de tentatives. Essayez à nouveau dans quelques minutes"
   },
   "success": {
     "userCreated": "Utilisateur créé avec succès.",

@@ -2,42 +2,41 @@
   "title": "Em desenvolvimento🚧🚧🚧🚧",
   "menu": {
     "home": "Início",
-    "services": "Serviços & Preços",
-    "about": "Sobre nós",
-    "contact": "Entre em contato",
+    "services": "Serviços e Preços",
+    "about": "Sobre Nós",
+    "contact": "Contacto",
     "gallery": "Galeria",
-    "blog": "Blog & dicas",
+    "blog": "Blog e Sugestões",
     "recruitment": "Recrutamento"
   },
-  "language": "Língua",
+  "language": "Idioma",
   "register": "Registar",
   "login": "Entrar",
   "loggingIn": "A entrar...",
   "registering": "A registar...",
   "verify": "A verificar...",
   "validation": {
-    "emailInvalid": "Email já registado ou inválido.",
-    "emailCheckError": "Erro ao verificar email.",
-    "passwordInvalid": "Senha não atende os requisitos.",
-    "passwordCheckError": "Erro ao verificar senha.",
-    "phoneInvalid": "Telemóvel já registado ou inválido.",
-    "phoneCheckError": "Erro ao verificar telemóvel."
+    "emailInvalid": "O e-mail já está registado ou é inválido.",
+    "emailCheckError": "Erro na verificação do e-mail.",
+    "passwordInvalid": "A senha não cumpre os requisitos.",
+    "passwordCheckError": "Erro na verificação da senha.",
+    "phoneInvalid": "O número de telefone já está registado ou é inválido.",
+    "phoneCheckError": "Erro na verificação do número de telefone."
   },
-  "email": "Email",
+  "email": "E-mail",
   "password": "Senha",
   "confirmPassword": "Confirmar Senha",
-  "phoneOptional": "Telemóvel (Opcional)",
+  "phoneOptional": "Telefone (opcional)",
   "next": "Próximo",
   "passwordMismatch": "As senhas não coincidem",
-
   "error": {
-    "emailInvalid": "Por favor, insira um e-mail válido.",
-    "emailExists": "Este e-mail já está registrado.",
+    "emailInvalid": "Por favor, insira um endereço de e-mail válido.",
+    "emailExists": "Este e-mail já está registado.",
     "emailRequired": "O e-mail é obrigatório.",
-    "userCreationFailed": "Erro ao criar o usuário."
+    "tooManyRequests": "Muitas tentativas. Por favor, tente novamente mais tarde."
   },
   "success": {
-    "userCreated": "Usuário criado com sucesso.",
-    "emailValid": "E-mail válido e disponível."
+    "userCreated": "Utilizador criado com sucesso.",
+    "emailValid": "O e-mail é válido e disponível."
   }
 }

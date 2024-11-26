@@ -2,11 +2,11 @@
   "title": "In sviluppo🚧🚧🚧🚧",
   "menu": {
     "home": "Home",
-    "services": "Servizi & Prezzi",
-    "about": "Chi siamo",
+    "services": "Servizi e Prezzi",
+    "about": "Chi Siamo",
     "contact": "Contattaci",
     "gallery": "Galleria",
-    "blog": "Blog & Consigli",
+    "blog": "Blog e Consigli",
     "recruitment": "Reclutamento"
   },
   "language": "Lingua",
@@ -16,24 +16,24 @@
   "registering": "Registrazione in corso...",
   "verify": "Verifica in corso...",
   "validation": {
-    "emailInvalid": "L'email è già registrata o non valida.",
-    "emailCheckError": "Errore durante la verifica dell'email.",
+    "emailInvalid": "Email già registrata o non valida.",
+    "emailCheckError": "Errore nella verifica dell'email.",
     "passwordInvalid": "La password non soddisfa i requisiti.",
-    "passwordCheckError": "Errore durante la verifica della password.",
-    "phoneInvalid": "Il numero di telefono è già registrato o non valido.",
-    "phoneCheckError": "Errore durante la verifica del numero di telefono."
+    "passwordCheckError": "Errore nella verifica della password.",
+    "phoneInvalid": "Numero di telefono già registrato o non valido.",
+    "phoneCheckError": "Errore nella verifica del numero di telefono."
   },
   "email": "Email",
   "password": "Password",
-  "confirmPassword": "Conferma password",
-  "phoneOptional": "Telefono (Opzionale)",
+  "confirmPassword": "Conferma Password",
+  "phoneOptional": "Telefono (opzionale)",
   "next": "Avanti",
   "passwordMismatch": "Le password non corrispondono",
   "error": {
-    "emailInvalid": "Per favore, inserisci un'email valida.",
+    "emailInvalid": "Inserisci un indirizzo email valido.",
     "emailExists": "Questa email è già registrata.",
     "emailRequired": "L'email è obbligatoria.",
-    "userCreationFailed": "Errore nella creazione dell'utente."
+    "tooManyRequests": "Troppe richieste. Riprova tra qualche minuto."
   },
   "success": {
     "userCreated": "Utente creato con successo.",
