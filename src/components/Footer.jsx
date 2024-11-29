@@ -42,7 +42,6 @@ export default function Footer() {
             position: "relative",
           }}
         >
-          {/* Primeira box - Alinhada à esquerda */}
           <Box
             display="flex"
             flexDirection="column"
@@ -128,7 +127,6 @@ export default function Footer() {
             </Typography>
           </Box>
 
-          {/* Terceira box - Alinhada à direita */}
           <Box display="flex" alignItems="center">
             <Typography variant="body2" color="white">
               Pagamento seguro via Stripe
