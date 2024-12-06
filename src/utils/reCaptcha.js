@@ -1,44 +1,33 @@
 class ReCaptchaV3 {
   constructor(siteKey) {
-    if (!siteKey) {
-      throw new Error("siteKey is required for reCAPTCHA.");
-    }
+    if (!siteKey) throw new Error("siteKey is required.");
     this.siteKey = siteKey;
     this.scriptLoaded = false;
   }
 
   async loadScript() {
     if (this.scriptLoaded) return;
-    return new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = `https://www.google.com/recaptcha/enterprise.js?render=${this.siteKey}`;
-      script.async = true;
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/enterprise.js?render=${this.siteKey}`;
+    script.async = true;
+    document.body.appendChild(script);
 
+    await new Promise((resolve, reject) => {
       script.onload = () => {
         this.scriptLoaded = true;
         resolve();
       };
-
       script.onerror = () =>
         reject(new Error("Failed to load reCAPTCHA script."));
-      document.body.appendChild(script);
     });
   }
 
   async execute(action) {
-    if (!action) {
-      throw new Error("Action is required to execute reCAPTCHA.");
-    }
-
+    if (!action) throw new Error("Action is required.");
     await this.loadScript();
-    return new Promise((resolve, reject) => {
-      window.grecaptcha.enterprise.ready(() => {
-        window.grecaptcha.enterprise
-          .execute(this.siteKey, { action })
-          .then((token) => resolve(token))
-          .catch((error) => reject(error));
-      });
-    });
+    return window.grecaptcha.enterprise.ready(() =>
+      window.grecaptcha.enterprise.execute(this.siteKey, { action })
+    );
   }
 }
 
