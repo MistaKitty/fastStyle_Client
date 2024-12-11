@@ -6,14 +6,7 @@ import "./index.css";
 import "./i18n";
 import { initializeReCaptcha } from "./utils/ReCaptchaLoader.js";
 
-initializeReCaptcha()
-  .then(() => {
-    console.log("reCAPTCHA script loaded successfully.");
-  })
-  .catch((error) => {
-    console.error("Error loading reCAPTCHA script:", error);
-  });
-
+initializeReCaptcha();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>

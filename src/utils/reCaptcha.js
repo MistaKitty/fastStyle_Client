@@ -25,9 +25,18 @@ class ReCaptchaV3 {
   async execute(action) {
     if (!action) throw new Error("Action is required.");
     await this.loadScript();
-    return window.grecaptcha.enterprise.ready(() =>
-      window.grecaptcha.enterprise.execute(this.siteKey, { action })
-    );
+
+    await new Promise((resolve) => window.grecaptcha.enterprise.ready(resolve));
+
+    try {
+      const token = await window.grecaptcha.enterprise.execute(this.siteKey, {
+        action,
+      });
+      if (!token) throw new Error("Token generation failed.");
+      return token;
+    } catch (error) {
+      throw new Error(`Error during reCAPTCHA execution: ${error.message}`);
+    }
   }
 }
 
