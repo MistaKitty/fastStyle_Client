@@ -11,10 +11,19 @@ const getApiBaseUrl = () => {
 };
 const baseUrl = getApiBaseUrl();
 // ----------------------------- API Logic -----------------------------
-const handleApiRequest = async (email, setErrors, errorMessage, t) => {
+const handleApiRequest = async (
+  email,
+  token,
+  recaptchaToken,
+  setErrors,
+  errorMessage,
+  t
+) => {
   try {
     const response = await axios.post(`${baseUrl}/api/users/validate-email`, {
       email,
+      token,
+      recaptchaToken,
     });
 
     if (!response.data.isValid) {
@@ -42,8 +51,21 @@ const handleApiRequest = async (email, setErrors, errorMessage, t) => {
   }
 };
 
-export const validateEmail = async (email, setErrors, t) => {
-  return handleApiRequest(email, setErrors, "validation.emailInvalid", t);
+export const validateEmail = async (
+  email,
+  token,
+  recaptchaToken,
+  setErrors,
+  t
+) => {
+  return handleApiRequest(
+    email,
+    token,
+    recaptchaToken,
+    setErrors,
+    "validation.emailInvalid",
+    t
+  );
 };
 
 // ----------------------------- Language Logic -----------------------------

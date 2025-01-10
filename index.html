@@ -1,10 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
+    <!-- Script Google reCAPTCHA -->
+    <script>
+      const script = document.createElement("script");
+      script.src = `https://www.google.com/recaptcha/api.js?render=6Lcwt58qAAAAAOL6bEfU1PRZBgXCHhTPIXBaK6AX`;
+      script.async = true;
+      script.onload = () => {
+        console.log("reCAPTCHA script carregado com sucesso!");
+      };
+      script.onerror = () => {
+        console.error("Erro ao carregar o script do reCAPTCHA.");
+      };
+      document.head.appendChild(script);
+    </script>
   </head>
   <body>
     <div id="root"></div>

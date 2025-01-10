@@ -29,14 +29,36 @@ const Register = () => {
   };
 
   // ----------------------------- Handlers Logic -----------------------------
-
   const handleLoadClick = async () => {
     setLoading(true);
-    const isValid = await validateEmail(formData.email, setErrors, t);
-    setLoading(false);
 
-    if (isValid) {
-      setStep(2);
+    try {
+      if (typeof grecaptcha !== "undefined") {
+        // eslint-disable-next-line no-undef
+        const token = await grecaptcha.execute(
+          "6Lcwt58qAAAAAOL6bEfU1PRZBgXCHhTPIXBaK6AX",
+          { action: "validate_email" }
+        );
+
+        // Chamar validação sem exibir mensagem de sucesso
+        const isValid = await validateEmail(
+          formData.email,
+          token,
+          token,
+          setErrors,
+          t
+        );
+
+        if (isValid) {
+          setStep(2); // Apenas avança para o próximo passo
+        }
+      } else {
+        console.error("grecaptcha não está definido.");
+      }
+    } catch (error) {
+      console.error("Erro ao validar email:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
